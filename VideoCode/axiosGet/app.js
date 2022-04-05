@@ -3,4 +3,4 @@ async function getJoke(firstName, lastName) {
   console.log(res.data.value.joke);
 }
 
-getJoke("Butters", "Steele")
+getJoke("Josh", "Darling")
