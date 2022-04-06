@@ -12,45 +12,45 @@
 
 
 async function getUsers(token) {
-  const res = await axios.get('https://hack-or-snooze-v3.herokuapp.com/users', { params: { token } });
-  console.log(res);
-}
+  const res = await axios.get('https://hack-or-snooze-v3.herokuapp.com/users/username', {params:{token}})
+  console.log(res)
+} 
 
 async function signUp(username, password, name) {
-  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/signup', { user: { name, username, password } })
-  console.log(res);
+  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/signup', {user:{ name, username, password } })
+  console.log(res)
 }
 
-async function login(username, password) {
-  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/login', { user: { username, password } })
-  console.log(res);
-  return res.data.token;
-}
-// getUsers();
-// signUp('butterschicken', '238197sadhj', 'butters the chicken')
+//signUp('jdarling96', 'password', 'josh darling');
 
-async function getUsersWithAuth() {
-  const token = await login('butterschicken', '238197sadhj');
-  getUsers(token);
+
+async function login (username, password) {
+  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/login', {user:{ username, password } })
+  console.log(res)
+  return res.data.token
 }
 
-async function createStory() {
-  const token = await login('butterschicken', '238197sadhj');
+//signUp('jdarling96', 'password', 'josh darling');
+async function getUsersWithAuth(){
+  const token = await login('jdarling96', 'password');
+  getUsers(token)
+}
+
+async function createStory(){
+  const token = await login('jdarling96', 'password');
   const newStory = {
-    token,
+     token,
     story: {
-      author: 'Butters',
-      title: 'BOCK BOCK BOCK',
-      url: 'http://chickens4lyfe.com'
+      author: "Josh Darling",
+      title: "The best story ever",
+      url: "http://google.com"
     }
   }
-  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories', newStory);
+  const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories', newStory)
   console.log(res);
+
 }
 
-// getUsersWithAuth();
-createStory();
 
-
-
+getUsersWithAuth();
 

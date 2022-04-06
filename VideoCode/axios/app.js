@@ -18,22 +18,30 @@ getData();
 
  async function getLaunches() {
   const res = await axios.get('https://api.spacexdata.com/v3/launches/upcoming');
+  renderLaunches(res.data);
+ 
+  
+}
+
+function renderLaunches(launches) {
   const ul = document.querySelector('#launches')
- console.log(res)
- for(let launch of res.data) {
-   const newLI = document.createElement('LI')
-   const mission = document.createElement('B')
-   mission.innerText = launch.mission_name
-   newLI.append(mission)
-   ul.append(newLI)
-   newLI.innerHTML += ` - {launch.rocket.rocket_name}`
-  //newLI.style.fontFamily
-  
-   console.log(launch.mission_name)
-  console.log(launch.rocket.rocket_name)
-}
-  
-}
-
-
+  for(let launch of res.data) {
+    ul.append(makeLaunchLI(launch))
    
+   //newLI.style.fontFamily
+
+        }
+}  
+   function makeLaunchLI(launch) {
+    const newLI = document.createElement('LI')
+    const mission = document.createElement('B')
+    mission.innerText = launch.mission_name
+    newLI.append(mission)
+    ul.append(newLI)
+    newLI.innerHTML += ` - {launch.rocket.rocket_name}`
+    return newLI;
+
+   }
+   
+   const btn = document.querySelector('#get-launches')
+   btn.addEventListener('click', getLaunches)
